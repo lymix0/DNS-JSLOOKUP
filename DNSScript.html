@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DNS Lookup</title>
+  </head>
+  <body>
+    <h1>DNS Lookup</h1>
+    <form id="dns-form">
+      <label for="domain-name">Enter domain name:</label><br>
+      <input type="text" id="domain-name" name="domain-name"><br>
+      <button type="submit">Lookup</button>
+    </form>
+    <script>
+      const form = document.getElementById('dns-form');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const domainName = document.getElementById('domain-name').value;
+        const dns = require('dns');
+        dns.resolveMx(domainName, (err, records) => {
+          if (err) {
+            console.error(err);
+          } else {
+            console.log(records);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
